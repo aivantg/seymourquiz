@@ -55,7 +55,7 @@ export default function Results({
       <Image
         width={300}
         height={200}
-        src={`/images/${hoveredPerson === bestPerson ? results[bestPerson].baby : image}`}
+        src={`/images/${hoveredPerson === bestPerson ? results[bestPerson].baby ?? image : image}`}
         onMouseEnter={() => setHoveredPerson(bestPerson)}
         onMouseLeave={() => setHoveredPerson(null)}
         alt={bestPerson}
