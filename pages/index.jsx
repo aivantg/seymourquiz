@@ -51,10 +51,12 @@ function Home() {
   // results
   const question = randomizedQuestions[index];
   if (!question) {
-    return <Results answers={answers} questions={randomizedQuestions} />;
+    return <Results answers={answers} questions={questions} />;
   }
 
-  const existingChoiceIndex = answers[index];
+  // Find the original index of the current question to check for existing answer
+  const originalIndex = questions.findIndex(q => q.title === question.title);
+  const existingChoiceIndex = answers[originalIndex];
 
   const handleGoBack = () => {
     if (index > 0) {
@@ -69,10 +71,14 @@ function Home() {
   };
 
   const handleAnswer = (choiceIndex) => {
+    // Find the original index of this question in the questions array
+    const currentQuestion = randomizedQuestions[index];
+    const originalIndex = questions.findIndex(q => q.title === currentQuestion.title);
+    
     setAnswers((oldAnswers) => {
       return {
         ...oldAnswers,
-        [index]: choiceIndex,
+        [originalIndex]: choiceIndex,
       };
     });
 
